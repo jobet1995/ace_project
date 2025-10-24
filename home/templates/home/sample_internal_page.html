@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-internalpage{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home_page.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/cta-banner.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ page.title }}</h1>
+    
+    {% if page.body %}
+        {% for block in page.body %}
+            {% if block.block_type == 'heading' %}
+                <h2>{{ block.value }}</h2>
+            {% elif block.block_type == 'paragraph' %}
+                {{ block.value|richtext }}
+            {% elif block.block_type == 'full_width_cta' %}
+                {% include "home/cta_banner.html" with cta_block=block.value %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+
+<!-- Example of how to add a CTA banner to any page -->
+<!--
+<section class="content-section">
+    <p>Some content here...</p>
+</section>
+
+{% with cta_block=dict(
+    heading="Ready to Get Started?",
+    subheading="Join thousands of satisfied customers today",
+    button_text="Contact Us Now",
+    button_link="/contact/",
+    theme_variant="dark"
+) %}
+    {% include "home/cta_banner.html" with cta_block=cta_block %}
+{% endwith %}
+-->
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/cta-banner.js' %}"></script>
+{% endblock %}

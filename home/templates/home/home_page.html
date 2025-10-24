@@ -5,6 +5,10 @@
 
 {% block extra_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/home_page.css' %}">
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<!-- Font Awesome for star ratings -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 {% endblock %}
 
 {% block content %}
@@ -87,56 +91,163 @@
 
     {# Testimonials Slider #}
     {% if page.testimonials_slider %}
-        <section class="testimonials-section">
-            <div class="container">
-                <h2>What Our Clients Say</h2>
-                <div class="testimonials-slider">
-                    {% for block in page.testimonials_slider %}
-                        <div class="testimonial-item">
-                            <blockquote>
-                                <p>{{ block.value.testimonial.quote }}</p>
-                                <footer>
-                                    {% if block.value.testimonial.image %}
-                                        {% image block.value.testimonial.image fill-60x60 class="testimonial-image" %}
-                                    {% endif %}
-                                    <div class="testimonial-author">
-                                        <strong>{{ block.value.testimonial.name }}</strong>
-                                        {% if block.value.testimonial.role %}
-                                            <span>{{ block.value.testimonial.role }}</span>
+        {% for block in page.testimonials_slider %}
+            {% if block.block_type == 'testimonial_carousel' %}
+                <section class="testimonials-section">
+                    <div class="container">
+                        <h2>{{ block.value.carousel.title }}</h2>
+                        {% if block.value.carousel.subtitle %}
+                            <p class="testimonials-subtitle">{{ block.value.carousel.subtitle }}</p>
+                        {% endif %}
+                        <div class="testimonials-container">
+                            <div class="swiper testimonials-swiper">
+                                <div class="swiper-wrapper">
+                                    {% for testimonial in block.value.testimonials %}
+                                        {% if testimonial.value.is_visible %}
+                                            <div class="swiper-slide">
+                                                <div class="testimonial-item">
+                                                    <blockquote>
+                                                        <p>{{ testimonial.value.quote }}</p>
+                                                        <div class="testimonial-rating">
+                                                            {% for i in "12345" %}
+                                                                {% if i|add:0 <= testimonial.value.star_rating %}
+                                                                    <i class="fas fa-star"></i>
+                                                                {% else %}
+                                                                    <i class="far fa-star"></i>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                        <footer>
+                                                            {% if testimonial.value.image %}
+                                                                {% image testimonial.value.image fill-60x60 class="testimonial-image" %}
+                                                            {% endif %}
+                                                            <div class="testimonial-author">
+                                                                <strong>{{ testimonial.value.name }}</strong>
+                                                                {% if testimonial.value.role %}
+                                                                    <span>{{ testimonial.value.role }}</span>
+                                                                {% endif %}
+                                                                {% if testimonial.value.company %}
+                                                                    <span>{{ testimonial.value.company }}</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </footer>
+                                                    </blockquote>
+                                                </div>
+                                            </div>
                                         {% endif %}
-                                        {% if block.value.testimonial.company %}
-                                            <span>{{ block.value.testimonial.company }}</span>
-                                        {% endif %}
-                                    </div>
-                                </footer>
-                            </blockquote>
+                                    {% endfor %}
+                                </div>
+                                {% if block.value.carousel.show_pagination %}
+                                    <div class="swiper-pagination testimonials-pagination"></div>
+                                {% endif %}
+                                {% if block.value.carousel.show_navigation %}
+                                    <div class="swiper-button-next testimonials-next"></div>
+                                    <div class="swiper-button-prev testimonials-prev"></div>
+                                {% endif %}
+                            </div>
                         </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
+                    </div>
+                </section>
+            {% else %}
+                <section class="testimonials-section">
+                    <div class="container">
+                        <h2>What Our Clients Say</h2>
+                        <div class="testimonials-slider">
+                            <div class="testimonial-item">
+                                <blockquote>
+                                    <p>{{ block.value.testimonial.quote }}</p>
+                                    <div class="testimonial-rating">
+                                        {% for i in "12345" %}
+                                            {% if i|add:0 <= block.value.testimonial.star_rating %}
+                                                <i class="fas fa-star"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <footer>
+                                        {% if block.value.testimonial.image %}
+                                            {% image block.value.testimonial.image fill-60x60 class="testimonial-image" %}
+                                        {% endif %}
+                                        <div class="testimonial-author">
+                                            <strong>{{ block.value.testimonial.name }}</strong>
+                                            {% if block.value.testimonial.role %}
+                                                <span>{{ block.value.testimonial.role }}</span>
+                                            {% endif %}
+                                            {% if block.value.testimonial.company %}
+                                                <span>{{ block.value.testimonial.company }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+        {% endfor %}
     {% endif %}
 
     {# Partners Carousel #}
     {% if page.partners_carousel %}
-        <section class="partners-section">
-            <div class="container">
-                <h2>Our Partners</h2>
-                <div class="partners-carousel">
-                    {% for block in page.partners_carousel %}
-                        <div class="partner-item">
-                            {% if block.value.partner.logo %}
-                                {% image block.value.partner.logo fill-200x100 class="partner-logo" %}
-                            {% endif %}
-                            <h3>{{ block.value.partner.name }}</h3>
-                            {% if block.value.partner.website %}
-                                <a href="{{ block.value.partner.website }}" target="_blank">Visit Website</a>
-                            {% endif %}
+        {% for block in page.partners_carousel %}
+            {% if block.block_type == 'partner_carousel' %}
+                <section class="partners-section">
+                    <div class="container">
+                        <h2>{{ block.value.carousel.title }}</h2>
+                        {% if block.value.carousel.subtitle %}
+                            <p class="partners-subtitle">{{ block.value.carousel.subtitle }}</p>
+                        {% endif %}
+                        <div class="partners-container">
+                            <div class="swiper partners-swiper">
+                                <div class="swiper-wrapper">
+                                    {% for partner in block.value.partners %}
+                                        <div class="swiper-slide">
+                                            <div class="partner-item">
+                                                {% if partner.value.logo %}
+                                                    {% image partner.value.logo fill-200x100 class="partner-logo" %}
+                                                {% endif %}
+                                                {% if partner.value.website %}
+                                                    <a href="{{ partner.value.website }}" target="_blank" class="partner-link">
+                                                        <span class="partner-name">{{ partner.value.name }}</span>
+                                                    </a>
+                                                {% else %}
+                                                    <span class="partner-name">{{ partner.value.name }}</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                {% if block.value.carousel.show_pagination %}
+                                    <div class="swiper-pagination partners-pagination"></div>
+                                {% endif %}
+                                {% if block.value.carousel.show_navigation %}
+                                    <div class="swiper-button-next partners-next"></div>
+                                    <div class="swiper-button-prev partners-prev"></div>
+                                {% endif %}
+                            </div>
                         </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
+                    </div>
+                </section>
+            {% else %}
+                <section class="partners-section">
+                    <div class="container">
+                        <h2>Our Partners</h2>
+                        <div class="partners-carousel">
+                            <div class="partner-item">
+                                {% if block.value.partner.logo %}
+                                    {% image block.value.partner.logo fill-200x100 class="partner-logo" %}
+                                {% endif %}
+                                <h3>{{ block.value.partner.name }}</h3>
+                                {% if block.value.partner.website %}
+                                    <a href="{{ block.value.partner.website }}" target="_blank">Visit Website</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+        {% endfor %}
     {% endif %}
 
     {# Blog Highlights #}
@@ -156,18 +267,73 @@
 
     {# Final Call-to-Action #}
     {% if page.final_cta %}
-        <section class="cta-section">
-            <div class="container">
-                {% for block in page.final_cta %}
-                    <div class="cta-content">
-                        <h2>{{ block.value.headline }}</h2>
-                        {% if block.value.subheadline %}
-                            <p>{{ block.value.subheadline }}</p>
-                        {% endif %}
-                        <a href="{{ block.value.cta_link }}" class="cta-button">{{ block.value.cta_text }}</a>
+        {% for block in page.final_cta %}
+            {% if block.block_type == 'full_width_cta' %}
+                <section class="cta-banner-section cta-{{ block.value.theme_variant }}" 
+                         {% if block.value.background_image %}{% image block.value.background_image fill-1920x600 as bg_image %}style="background-image: url('{{ bg_image.url }}');"{% endif %}>
+                    <div class="cta-overlay" {% if block.value.overlay_color %}style="background-color: {{ block.value.overlay_color }};"{% endif %}></div>
+                    <div class="container">
+                        <div class="cta-content">
+                            <h2>{{ block.value.heading }}</h2>
+                            {% if block.value.subheading %}
+                                <p>{{ block.value.subheading }}</p>
+                            {% endif %}
+                            <a href="{{ block.value.button_link }}" class="cta-button cta-button-{{ block.value.theme_variant }}">{{ block.value.button_text }}</a>
+                        </div>
                     </div>
-                {% endfor %}
-            </div>
-        </section>
+                </section>
+            {% else %}
+                <section class="cta-section">
+                    <div class="container">
+                        <div class="cta-content">
+                            <h2>{{ block.value.headline }}</h2>
+                            {% if block.value.subheadline %}
+                                <p>{{ block.value.subheadline }}</p>
+                            {% endif %}
+                            <a href="{{ block.value.cta_link }}" class="cta-button">{{ block.value.cta_text }}</a>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+        {% endfor %}
     {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Swiper for partners carousel
+    var partnerSwiper = new Swiper('.partners-swiper', {
+        slidesPerView: 2,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.partners-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.partners-next',
+            prevEl: '.partners-prev',
+        },
+        breakpoints: {
+            576: {
+                slidesPerView: 3,
+            },
+            768: {
+                slidesPerView: 4,
+            },
+            992: {
+                slidesPerView: 6,
+            },
+        },
+    });
+});
+</script>
 {% endblock %}

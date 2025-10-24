@@ -246,14 +246,6 @@
       
       // Store reference for potential future use
       window.testimonialSwiper = testimonialSwiper;
-      
-      // Add event listeners to demonstrate usage
-      testimonialSwiper.on('slideChange', function () {
-        // This could be used for analytics or other functionality
-        if (window.console && window.console.log) {
-          console.log('Testimonial slide changed');
-        }
-      });
     } else {
       // Fallback to jQuery carousel if Swiper is not available
       console.warn('Swiper.js not found, using jQuery fallback for testimonials carousel');
@@ -322,14 +314,6 @@
       
       // Store reference for potential future use
       window.partnerSwiper = partnerSwiper;
-      
-      // Add event listeners to demonstrate usage
-      partnerSwiper.on('slideChange', function () {
-        // This could be used for analytics or other functionality
-        if (window.console && window.console.log) {
-          console.log('Partner slide changed');
-        }
-      });
     } else {
       // Fallback to jQuery carousel if Swiper is not available
       console.warn('Swiper.js not found, using jQuery fallback for partners carousel');
@@ -424,9 +408,9 @@
         type: 'POST',
         data: formData,
         dataType: 'json',
-        success: function (_response) {
+        success: function (response) {
           // Show success message
-          showFormMessage($form, 'Thank you for your inquiry. We will contact you soon.', 'success');
+          showFormMessage($form, 'Thank you for your inquiry. We will contact you soon.', 'success', response.message);
           $form[0].reset();
         },
         error: function (xhr, _status, _error) {
@@ -581,34 +565,7 @@
     
     // Initialize performance monitoring
     initPerformanceMonitoring();
-    
-    // Initialize additional features
-    initAdditionalFeatures();
   });
-  
-  // Initialize additional features that use stored references
-  function initAdditionalFeatures() {
-    // Set up keyboard controls for carousels if they exist
-    if (window.testimonialSwiper) {
-      $(document).on('keydown', function(e) {
-        if (e.keyCode === 37) { // Left arrow
-          window.testimonialSwiper.slidePrev();
-        } else if (e.keyCode === 39) { // Right arrow
-          window.testimonialSwiper.slideNext();
-        }
-      });
-    }
-    
-    // Log when carousels are initialized
-    if (window.console && window.console.log) {
-      if (window.testimonialSwiper) {
-        console.log('Testimonial carousel initialized');
-      }
-      if (window.partnerSwiper) {
-        console.log('Partner carousel initialized');
-      }
-    }
-  }
   
   // Initialize performance monitoring
   function initPerformanceMonitoring() {

@@ -1,0 +1,136 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<!-- Dynamic Testimonials Carousel Plugin Section -->
+{% if page.testimonials_slider %}
+  {% for block in page.testimonials_slider %}
+    {% if block.block_type == 'testimonial_carousel' %}
+      <section class="testimonials-section" id="testimonials">
+        <div class="container">
+          <h2 class="slide-up">{{ block.value.carousel.title }}</h2>
+          {% if block.value.carousel.subtitle %}
+            <p class="section-description">{{ block.value.carousel.subtitle }}</p>
+          {% endif %}
+          <div class="testimonials-container">
+            <div class="swiper testimonials-swiper" 
+                 data-loop="{{ block.value.carousel.loop|yesno:"true,false" }}"
+                 data-autoplay="{{ block.value.carousel.autoplay|yesno:"true,false" }}"
+                 data-autoplay-delay="{{ block.value.carousel.autoplay_delay }}"
+                 data-show-navigation="{{ block.value.carousel.show_navigation|yesno:"true,false" }}"
+                 data-show-pagination="{{ block.value.carousel.show_pagination|yesno:"true,false" }}"
+                 data-mobile-view="{{ block.value.carousel.testimonials_per_view_mobile }}"
+                 data-tablet-view="{{ block.value.carousel.testimonials_per_view_tablet }}"
+                 data-desktop-view="{{ block.value.carousel.testimonials_per_view_desktop }}">
+              <div class="swiper-wrapper">
+                {% for testimonial in block.value.testimonials %}
+                  {% if testimonial.is_visible %}
+                    <div class="swiper-slide">
+                      <div class="testimonial-item">
+                        <blockquote>
+                          <p>"{{ testimonial.quote }}"</p>
+                          <footer>
+                            {% if testimonial.image %}
+                              {% image testimonial.image fill-70x70 class="testimonial-image" %}
+                            {% else %}
+                              <div class="testimonial-image-placeholder">
+                                <i class="fas fa-user"></i>
+                              </div>
+                            {% endif %}
+                            <div class="testimonial-author">
+                              <strong>{{ testimonial.name }}</strong>
+                              {% if testimonial.role %}
+                                <span>{{ testimonial.role }}</span>
+                              {% endif %}
+                              {% if testimonial.company %}
+                                <span>{{ testimonial.company }}</span>
+                              {% endif %}
+                              <!-- Star Rating -->
+                              <div class="rating">
+                                {% for i in "12345" %}
+                                  {% if i|add:0 <= testimonial.star_rating %}
+                                    <i class="fas fa-star"></i>
+                                  {% else %}
+                                    <i class="far fa-star"></i>
+                                  {% endif %}
+                                {% endfor %}
+                              </div>
+                            </div>
+                          </footer>
+                        </blockquote>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              
+              <!-- Navigation Arrows -->
+              {% if block.value.carousel.show_navigation %}
+                <div class="testimonials-navigation">
+                  <div class="testimonials-prev swiper-button-prev"></div>
+                  <div class="testimonials-next swiper-button-next"></div>
+                </div>
+              {% endif %}
+              
+              <!-- Pagination -->
+              {% if block.value.carousel.show_pagination %}
+                <div class="testimonials-pagination swiper-pagination"></div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
+    {% elif block.block_type == 'testimonial' %}
+      <!-- Handle individual testimonial blocks if needed -->
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+<!-- Initialize Swiper for Testimonials -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all testimonials swipers
+    const testimonialSwipers = document.querySelectorAll('.testimonials-swiper');
+    testimonialSwipers.forEach(function(swiperElement) {
+      const loop = swiperElement.dataset.loop === 'true';
+      const autoplay = swiperElement.dataset.autoplay === 'true';
+      const autoplayDelay = parseInt(swiperElement.dataset.autoplayDelay) || 5000;
+      const showNavigation = swiperElement.dataset.showNavigation === 'true';
+      const showPagination = swiperElement.dataset.showPagination === 'true';
+      const mobileView = parseInt(swiperElement.dataset.mobileView) || 1;
+      const tabletView = parseInt(swiperElement.dataset.tabletView) || 2;
+      const desktopView = parseInt(swiperElement.dataset.desktopView) || 3;
+      
+      new Swiper(swiperElement, {
+        loop: loop,
+        autoplay: autoplay ? {
+          delay: autoplayDelay,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        } : false,
+        slidesPerView: 1,
+        spaceBetween: 30,
+        navigation: showNavigation ? {
+          nextEl: '.testimonials-next',
+          prevEl: '.testimonials-prev',
+        } : false,
+        pagination: showPagination ? {
+          el: '.testimonials-pagination',
+          clickable: true,
+        } : false,
+        breakpoints: {
+          576: {
+            slidesPerView: mobileView,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: tabletView,
+            spaceBetween: 30,
+          },
+          992: {
+            slidesPerView: desktopView,
+            spaceBetween: 30,
+          }
+        }
+      });
+    });
+  });
+</script>
