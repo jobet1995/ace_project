@@ -184,10 +184,61 @@ class CallToActionBlock(blocks.StructBlock):
     label = "Call to Action"
 
 
+# New StructBlocks for the requested sections
+class IndustryBlock(blocks.StructBlock):
+    """Block for industries served with logo or icon"""
+    name = blocks.CharBlock(
+        required=True,
+        max_length=100,
+        help_text=_("Name of the industry")
+    )
+    logo_or_icon = ImageChooserBlock(
+        required=False,
+        help_text=_("Logo or icon representing the industry")
+    )
+    description = blocks.TextBlock(
+        required=False,
+        max_length=200,
+        help_text=_("Brief description of our work in this industry")
+    )
+
+
+class CaseStudyBlock(blocks.StructBlock):
+    """Block for case studies or project highlights"""
+    project_title = blocks.CharBlock(
+        required=True,
+        max_length=100,
+        help_text=_("Title of the project")
+    )
+    short_description = blocks.TextBlock(
+        required=True,
+        max_length=300,
+        help_text=_("Brief description of the project")
+    )
+    project_image = ImageChooserBlock(
+        required=False,
+        help_text=_("Featured image of the project")
+    )
+    project_link = blocks.PageChooserBlock(
+        required=False,
+        help_text=_("Link to detailed project page")
+    )
+    client_name = blocks.CharBlock(
+        required=False,
+        max_length=100,
+        help_text=_("Name of the client")
+    )
+
+
 class HomePage(Page):
     # Hero section
     hero_section = StreamField([
         ('hero', HeroBlock()),
+    ], use_json_field=True, blank=True)
+
+    # About preview
+    about_summary = StreamField([
+        ('about', AboutPreviewBlock()),
     ], use_json_field=True, blank=True)
 
     # Services overview
@@ -195,14 +246,14 @@ class HomePage(Page):
         ('service', ServiceBlock()),
     ], use_json_field=True, blank=True)
 
-    # About preview
-    about_preview = StreamField([
-        ('about', AboutPreviewBlock()),
+    # Industries served
+    industries_served = StreamField([
+        ('industry', IndustryBlock()),
     ], use_json_field=True, blank=True)
 
-    # Key stats
-    key_stats = StreamField([
-        ('stat', StatBlock()),
+    # Case studies / projects highlight
+    case_studies = StreamField([
+        ('case_study', CaseStudyBlock()),
     ], use_json_field=True, blank=True)
 
     # Testimonials slider
@@ -210,19 +261,14 @@ class HomePage(Page):
         ('testimonial', TestimonialBlock()),
     ], use_json_field=True, blank=True)
 
-    # Partners carousel
-    partners_carousel = StreamField([
-        ('partner', PartnerBlock()),
-    ], use_json_field=True, blank=True)
-
-    # Blog highlights
-    blog_highlights = StreamField([
-        ('blog_highlight', BlogHighlightBlock()),
-    ], use_json_field=True, blank=True)
-
-    # Final CTA
-    final_cta = StreamField([
+    # Call-to-action section
+    call_to_action = StreamField([
         ('cta', CTABlock()),
+    ], use_json_field=True, blank=True)
+
+    # Latest news or insights
+    latest_news = StreamField([
+        ('blog_highlight', BlogHighlightBlock()),
     ], use_json_field=True, blank=True)
 
     # SEO fields
@@ -258,22 +304,31 @@ class HomePage(Page):
     def get_twitter_card_type(self):
         return self.twitter_card_type or 'summary_large_image'
 
+    def get_latest_blog_posts(self, num_posts=3):
+        """
+        Get the latest blog posts for the homepage.
+        """
+        from home.blog_models import BlogPage
+        return BlogPage.objects.live().order_by('-date')[:num_posts]
+
     # Search index configuration
     search_fields = Page.search_fields + [
         index.SearchField('hero_section'),
+        index.SearchField('about_summary'),
         index.SearchField('services_overview'),
-        index.SearchField('about_preview'),
+        index.SearchField('industries_served'),
+        index.SearchField('case_studies'),
     ]
 
     content_panels = Page.content_panels + [
         FieldPanel('hero_section'),
+        FieldPanel('about_summary'),
         FieldPanel('services_overview'),
-        FieldPanel('about_preview'),
-        FieldPanel('key_stats'),
+        FieldPanel('industries_served'),
+        FieldPanel('case_studies'),
         FieldPanel('testimonials_slider'),
-        FieldPanel('partners_carousel'),
-        FieldPanel('blog_highlights'),
-        FieldPanel('final_cta'),
+        FieldPanel('call_to_action'),
+        FieldPanel('latest_news'),
     ]
 
     promote_panels = [

@@ -1,0 +1,29 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Test</title>
+</head>
+<body>
+    <h1>Image Test</h1>
+    
+    {% if page.hero_section %}
+        {% for block in page.hero_section %}
+            {% if block.value.background_image %}
+                <h2>Background Image Test</h2>
+                {% image block.value.background_image fill-1920x1080 as bg_image %}
+                <p>Image URL: {{ bg_image.url }}</p>
+                <img src="{{ bg_image.url }}" alt="Test Image" style="max-width: 100%; height: auto;">
+                
+                <h2>Direct Background Test</h2>
+                <div style="width: 100%; height: 400px; background-image: url('{{ bg_image.url }}'); background-size: cover; background-position: center;"></div>
+            {% else %}
+                <p>No background image found</p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No hero section found</p>
+    {% endif %}
+</body>
+</html>

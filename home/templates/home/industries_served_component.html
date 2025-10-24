@@ -1,0 +1,178 @@
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+<!-- Industries Served Component -->
+<section class="industries-section py-5">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="display-5 fw-bold mb-3">Industries We Serve</h2>
+        <p class="lead text-muted">Our expertise spans across multiple sectors, delivering tailored solutions for each industry</p>
+      </div>
+    </div>
+    
+    <!-- Industries Grid -->
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-4">
+      <!-- Industry 1 -->
+      <div class="col">
+        <div class="industry-card text-center">
+          <div class="industry-icon-wrapper mb-3">
+            <!-- Technology Icon -->
+            <div class="industry-icon grayscale-on-hover">
+              <i class="bi bi-laptop" style="font-size: 3rem;"></i>
+            </div>
+          </div>
+          <h3 class="h5 fw-bold mb-0">Technology</h3>
+        </div>
+      </div>
+      
+      <!-- Industry 2 -->
+      <div class="col">
+        <div class="industry-card text-center">
+          <div class="industry-icon-wrapper mb-3">
+            <!-- Finance Icon -->
+            <div class="industry-icon grayscale-on-hover">
+              <i class="bi bi-bank" style="font-size: 3rem;"></i>
+            </div>
+          </div>
+          <h3 class="h5 fw-bold mb-0">Finance</h3>
+        </div>
+      </div>
+      
+      <!-- Industry 3 -->
+      <div class="col">
+        <div class="industry-card text-center">
+          <div class="industry-icon-wrapper mb-3">
+            <!-- Healthcare Icon -->
+            <div class="industry-icon grayscale-on-hover">
+              <i class="bi bi-heart-pulse" style="font-size: 3rem;"></i>
+            </div>
+          </div>
+          <h3 class="h5 fw-bold mb-0">Healthcare</h3>
+        </div>
+      </div>
+      
+      <!-- Industry 4 -->
+      <div class="col">
+        <div class="industry-card text-center">
+          <div class="industry-icon-wrapper mb-3">
+            <!-- Education Icon -->
+            <div class="industry-icon grayscale-on-hover">
+              <i class="bi bi-mortarboard" style="font-size: 3rem;"></i>
+            </div>
+          </div>
+          <h3 class="h5 fw-bold mb-0">Education</h3>
+        </div>
+      </div>
+      
+      <!-- Industry 5 -->
+      <div class="col">
+        <div class="industry-card text-center">
+          <div class="industry-icon-wrapper mb-3">
+            <!-- Retail Icon -->
+            <div class="industry-icon grayscale-on-hover">
+              <i class="bi bi-shop" style="font-size: 3rem;"></i>
+            </div>
+          </div>
+          <h3 class="h5 fw-bold mb-0">Retail</h3>
+        </div>
+      </div>
+      
+      <!-- Industry 6 -->
+      <div class="col">
+        <div class="industry-card text-center">
+          <div class="industry-icon-wrapper mb-3">
+            <!-- Manufacturing Icon -->
+            <div class="industry-icon grayscale-on-hover">
+              <i class="bi bi-gear" style="font-size: 3rem;"></i>
+            </div>
+          </div>
+          <h3 class="h5 fw-bold mb-0">Manufacturing</h3>
+        </div>
+      </div>
+      
+      <!-- Industry 7 -->
+      <div class="col">
+        <div class="industry-card text-center">
+          <div class="industry-icon-wrapper mb-3">
+            <!-- Logistics Icon -->
+            <div class="industry-icon grayscale-on-hover">
+              <i class="bi bi-truck" style="font-size: 3rem;"></i>
+            </div>
+          </div>
+          <h3 class="h5 fw-bold mb-0">Logistics</h3>
+        </div>
+      </div>
+      
+      <!-- Industry 8 -->
+      <div class="col">
+        <div class="industry-card text-center">
+          <div class="industry-icon-wrapper mb-3">
+            <!-- Real Estate Icon -->
+            <div class="industry-icon grayscale-on-hover">
+              <i class="bi bi-building" style="font-size: 3rem;"></i>
+            </div>
+          </div>
+          <h3 class="h5 fw-bold mb-0">Real Estate</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Industries Served Component Styles */
+  .industries-section {
+    background-color: #ffffff;
+  }
+  
+  .industry-card {
+    padding: 1.5rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+  }
+  
+  .industry-card:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Grayscale to color effect */
+  .grayscale-on-hover {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+  }
+  
+  .industry-card:hover .grayscale-on-hover {
+    filter: grayscale(0%);
+  }
+  
+  .industry-icon {
+    color: #455A64;
+  }
+  
+  .industry-card h3 {
+    color: #263238;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 576px) {
+    .industry-card {
+      padding: 1rem 0.5rem;
+    }
+    
+    .industry-icon {
+      font-size: 2rem !important;
+    }
+    
+    .industry-card h3 {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 768px) {
+    .industry-card {
+      padding: 1.25rem 0.75rem;
+    }
+  }
+</style>

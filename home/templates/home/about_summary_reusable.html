@@ -1,0 +1,165 @@
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+<!-- Reusable About Us Summary Component -->
+<section class="about-summary-section py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Left Column: Text Content -->
+      <div class="col-lg-6 animate-on-scroll">
+        <div class="about-content">
+          <h2 class="display-5 fw-bold mb-4">{{ section_title|default:"About Us" }}</h2>
+          {% if summary_text %}
+            <div class="mb-4">
+              {{ summary_text|richtext }}
+            </div>
+          {% elif summary_text_plain %}
+            <p class="lead mb-4">{{ summary_text_plain }}</p>
+            <p class="mb-4">{{ additional_text|default:"We are committed to delivering exceptional solutions that drive business growth and innovation." }}</p>
+          {% endif %}
+          <a href="{{ button_link|default:'/about/' }}" class="btn btn-primary btn-lg px-4 py-2">{{ button_text|default:"Know More" }}</a>
+        </div>
+      </div>
+      
+      <!-- Right Column: Image or Background Pattern -->
+      <div class="col-lg-6 mt-4 mt-lg-0 animate-on-scroll">
+        <div class="about-image-wrapper">
+          {% if about_image %}
+            {% image about_image width-600 class="img-fluid rounded-3 shadow" %}
+          {% elif background_pattern %}
+            <div class="about-pattern" style="min-height: 400px; background: linear-gradient(135deg, #ECEFF1 0%, #CFD8DC 100%);"></div>
+          {% else %}
+            <!-- Default background pattern -->
+            <div class="about-pattern-placeholder d-flex align-items-center justify-content-center rounded-3" 
+                 style="min-height: 400px; background: linear-gradient(135deg, #ECEFF1 0%, #CFD8DC 100%);">
+              <div class="pattern-content text-center p-4">
+                <div class="pattern-icon mb-3">
+                  <i class="bi bi-building text-primary" style="font-size: 4rem;"></i>
+                </div>
+                <h3 class="text-primary">{{ company_name|default:"Global Ace Technology" }}</h3>
+                <p class="text-muted mb-0">{{ tagline|default:"Innovative Solutions" }}</p>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* About Summary Component Styles */
+  .about-summary-section {
+    background-color: #ffffff;
+  }
+  
+  .about-content h2 {
+    color: #263238;
+  }
+  
+  .about-content .lead {
+    color: #455A64;
+    font-weight: 400;
+  }
+  
+  .about-content p {
+    color: #546E7A;
+  }
+  
+  .about-content .rich-text {
+    color: #546E7A;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+  
+  /* Button styling */
+  .btn-primary {
+    background-color: #455A64;
+    border-color: #455A64;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #37474F;
+    border-color: #37474F;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Image styling */
+  .about-image-wrapper img {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+  }
+  
+  .about-image-wrapper img:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Pattern styling */
+  .about-pattern {
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Pattern placeholder */
+  .about-pattern-placeholder {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Scroll animation */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .animate-on-scroll.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 991.98px) {
+    .about-content {
+      text-align: center;
+    }
+    
+    .about-content .btn {
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<script>
+  // Simple scroll animation script
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if element is in viewport
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+    
+    // Add animation class when element enters viewport
+    function animateOnScroll() {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(element => {
+        if (isInViewport(element)) {
+          element.classList.add('animate');
+        }
+      });
+    }
+    
+    // Initial check on page load
+    animateOnScroll();
+    
+    // Check on scroll
+    window.addEventListener('scroll', animateOnScroll);
+  });
+</script>

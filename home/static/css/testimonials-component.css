@@ -1,0 +1,145 @@
+/* Testimonials Component Styles */
+
+.testimonials-section {
+  background-color: #ffffff;
+}
+
+.testimonials-swiper {
+  padding: 2rem 0;
+  position: relative;
+}
+
+.testimonial-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.blockquote {
+  position: relative;
+  margin: 0 0 2rem 0;
+  padding: 0 0 0 2rem;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.blockquote:before {
+  content: '"';
+  position: absolute;
+  left: -0.5rem;
+  top: -1rem;
+  font-size: 4rem;
+  color: #0B3D91;
+  opacity: 0.2;
+  font-family: Georgia, serif;
+}
+
+.testimonial-quote {
+  margin-bottom: 0;
+}
+
+.testimonial-image-wrapper {
+  flex-shrink: 0;
+}
+
+.testimonial-author strong {
+  font-size: 1.1rem;
+}
+
+/* Swiper Navigation Arrows */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #0B3D91;
+  background: rgba(255, 255, 255, 0.8);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  top: calc(50% - 25px);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+/* Swiper Pagination */
+.swiper-pagination {
+  position: relative;
+  margin-top: 2rem;
+}
+
+.swiper-pagination-bullet {
+  background: #0B3D91;
+  opacity: 0.5;
+  width: 12px;
+  height: 12px;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #0B3D91;
+  transform: scale(1.2);
+}
+
+/* Fade effect for slides */
+.swiper-slide {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.swiper-slide-active {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .blockquote {
+    padding: 0;
+    font-size: 1rem;
+  }
+  
+  .blockquote:before {
+    display: none;
+  }
+  
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .testimonials-swiper {
+    padding: 1rem 0;
+  }
+  
+  .testimonial-card {
+    margin: 0 10px;
+  }
+}

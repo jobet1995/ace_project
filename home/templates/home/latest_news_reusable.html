@@ -1,0 +1,153 @@
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+<!-- Reusable Latest News Component -->
+<section class="blog-section py-5">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="display-5 fw-bold mb-3">{{ section_title|default:"Latest News & Insights" }}</h2>
+        <p class="lead text-muted">{{ section_description|default:"Stay up to date with our latest thoughts and innovations" }}</p>
+      </div>
+    </div>
+    
+    <!-- Blog Posts Grid -->
+    <div class="row g-4">
+      {% for post in latest_posts %}
+        <div class="col-lg-4 col-md-6">
+          <div class="blog-card h-100 border-0 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <!-- Blog Image -->
+              <div class="blog-image-wrapper mb-4">
+                {% if post.og_image %}
+                  {% image post.og_image fill-400x250 as blog_image %}
+                  <img src="{{ blog_image.url }}" alt="{{ post.title }}" class="blog-image img-fluid rounded">
+                {% else %}
+                  <div class="placeholder-bg bg-primary bg-opacity-10 d-flex align-items-center justify-content-center rounded" style="height: 250px;">
+                    <i class="bi bi-image text-primary" style="font-size: 3rem;"></i>
+                  </div>
+                {% endif %}
+              </div>
+              
+              <!-- Blog Content -->
+              <h3 class="h4 fw-bold mb-3">{{ post.title }}</h3>
+              <p class="text-muted flex-grow-1">{{ post.introduction|truncatewords:20 }}</p>
+              <a href="{% pageurl post %}" class="btn btn-outline-primary mt-auto">Read More</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <!-- Default blog posts if none provided -->
+        <div class="col-lg-4 col-md-6">
+          <div class="blog-card h-100 border-0 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <div class="blog-image-wrapper mb-4">
+                <div class="placeholder-bg bg-primary bg-opacity-10 d-flex align-items-center justify-content-center rounded" style="height: 250px;">
+                  <i class="bi bi-image text-primary" style="font-size: 3rem;"></i>
+                </div>
+              </div>
+              <h3 class="h4 fw-bold mb-3">Understanding Cloud Security</h3>
+              <p class="text-muted flex-grow-1">Learn about the latest trends in cloud security and how to protect your business data in the cloud.</p>
+              <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="blog-card h-100 border-0 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <div class="blog-image-wrapper mb-4">
+                <div class="placeholder-bg bg-primary bg-opacity-10 d-flex align-items-center justify-content-center rounded" style="height: 250px;">
+                  <i class="bi bi-image text-primary" style="font-size: 3rem;"></i>
+                </div>
+              </div>
+              <h3 class="h4 fw-bold mb-3">The Future of AI in Business</h3>
+              <p class="text-muted flex-grow-1">Explore how artificial intelligence is transforming industries and what it means for your business.</p>
+              <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="blog-card h-100 border-0 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <div class="blog-image-wrapper mb-4">
+                <div class="placeholder-bg bg-primary bg-opacity-10 d-flex align-items-center justify-content-center rounded" style="height: 250px;">
+                  <i class="bi bi-image text-primary" style="font-size: 3rem;"></i>
+                </div>
+              </div>
+              <h3 class="h4 fw-bold mb-3">Cybersecurity Best Practices</h3>
+              <p class="text-muted flex-grow-1">Essential cybersecurity practices every business should implement to protect against threats.</p>
+              <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Latest News Component Styles */
+  .blog-section {
+    background-color: #f8f9fa;
+  }
+  
+  .blog-card {
+    transition: all 0.3s ease;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    top: 0;
+  }
+  
+  .blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    top: -5px;
+  }
+  
+  .blog-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    overflow: hidden;
+  }
+  
+  .blog-image {
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .blog-card:hover .blog-image {
+    transform: scale(1.05);
+  }
+  
+  .card-body {
+    padding: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 1.5rem;
+    }
+    
+    .blog-image-wrapper {
+      height: 200px;
+    }
+  }
+  
+  /* Button hover effect */
+  .btn-outline-primary {
+    border-width: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+</style>

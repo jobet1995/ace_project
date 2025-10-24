@@ -1,0 +1,120 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<!-- Reusable Services Overview Component -->
+<section class="services-overview-section py-5">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="display-5 fw-bold mb-3">{{ section_title|default:"Our Services" }}</h2>
+        <p class="lead text-muted">{{ section_description|default:"Discover how we can help transform your business with cutting-edge technology solutions" }}</p>
+      </div>
+    </div>
+    
+    <!-- Services Grid - 3-column on desktop, 2-column on tablet, 1-column on mobile -->
+    <div class="row g-4">
+      {% for service in services_data %}
+        <div class="col-lg-4 col-md-6">
+          <div class="card service-card h-100 border-0 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <div class="service-icon-wrapper mb-4">
+                {% if service.icon %}
+                  {% image service.icon fill-80x80 as service_icon %}
+                  <img src="{{ service_icon.url }}" alt="{{ service.title }}" class="service-icon img-fluid">
+                {% elif service.icon_svg %}
+                  {{ service.icon_svg|safe }}
+                {% else %}
+                  <!-- Default Bootstrap Icon -->
+                  <i class="bi bi-gear-wide-connected text-primary" style="font-size: 3rem;"></i>
+                {% endif %}
+              </div>
+              <h3 class="h4 fw-bold mb-3">{{ service.title }}</h3>
+              <p class="text-muted flex-grow-1">{{ service.description }}</p>
+              <a href="{{ service.link }}" class="btn btn-outline-primary mt-auto">Learn More</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    
+    {% if show_view_all_button %}
+      <div class="row mt-5">
+        <div class="col-12 text-center">
+          <a href="{{ view_all_link|default:'/services/' }}" class="btn btn-primary btn-lg">{{ view_all_text|default:"View All Services" }}</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  /* Services Overview Component Styles */
+  .services-overview-section {
+    background-color: #f8f9fa;
+  }
+  
+  .service-card {
+    transition: all 0.3s ease;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    top: 0;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    top: -5px;
+  }
+  
+  .service-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+  
+  .service-icon {
+    transition: transform 0.3s ease;
+    max-width: 80px;
+    height: auto;
+  }
+  
+  .service-card:hover .service-icon {
+    transform: scale(1.1);
+  }
+  
+  .card-body {
+    padding: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 1.5rem;
+    }
+    
+    .service-icon {
+      max-width: 60px;
+    }
+  }
+  
+  /* Button hover effect */
+  .btn-outline-primary {
+    border-width: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-primary {
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+</style>

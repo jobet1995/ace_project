@@ -13,7 +13,24 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" type="text/css" href="{% static 'css/home_page.css' %}">
 <style>
-  /* Additional custom styles for Bootstrap version */
+  /* Corporate styling with blue-gray palette */
+  :root {
+    --bs-blue-gray-100: #ECEFF1;
+    --bs-blue-gray-200: #CFD8DC;
+    --bs-blue-gray-300: #B0BEC5;
+    --bs-blue-gray-400: #90A4AE;
+    --bs-blue-gray-500: #78909C;
+    --bs-blue-gray-600: #546E7A;
+    --bs-blue-gray-700: #455A64;
+    --bs-blue-gray-800: #37474F;
+    --bs-blue-gray-900: #263238;
+  }
+  
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--bs-blue-gray-800);
+  }
+  
   .hero-section {
     position: relative;
     height: 100vh;
@@ -32,7 +49,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(38, 50, 56, 0.7);
   }
 
   .hero-content {
@@ -41,335 +58,367 @@
     max-width: 800px;
   }
 
-  .service-card {
+  .section-bg {
+    background-color: var(--bs-blue-gray-100);
+  }
+  
+  .service-card, .industry-card, .project-card, .testimonial-card {
     transition: transform 0.3s, box-shadow 0.3s;
     height: 100%;
   }
 
-  .service-card:hover {
+  .service-card:hover, .industry-card:hover, .project-card:hover, .testimonial-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   }
-
-  .service-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: #0d6efd;
-  }
-
+  
   .stats-section {
-    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    background: linear-gradient(135deg, var(--bs-blue-gray-700), var(--bs-blue-gray-900));
     color: white;
   }
-
+  
   .stat-number {
-    font-size: 3rem;
-    font-weight: bold;
+    font-size: 2.5rem;
+    font-weight: 700;
   }
-
-  .testimonial-card {
-    border: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  
+  .stat-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
-
-  .partner-logo {
-    filter: grayscale(100%);
-    transition: filter 0.3s;
-    max-width: 150px;
-    margin: 0 auto;
-  }
-
-  .partner-logo:hover {
-    filter: grayscale(0%);
-  }
-
-  .blog-card {
-    transition: transform 0.3s;
-  }
-
-  .blog-card:hover {
-    transform: translateY(-5px);
-  }
-
+  
   .cta-section {
-    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    background: linear-gradient(135deg, var(--bs-blue-gray-600), var(--bs-blue-gray-800));
     color: white;
   }
-
-  .swiper {
-    padding: 2rem 0;
+  
+  .btn-primary {
+    background-color: var(--bs-blue-gray-700);
+    border-color: var(--bs-blue-gray-700);
   }
-
-  .swiper-pagination-bullet-active {
-    background: #0d6efd;
+  
+  .btn-primary:hover {
+    background-color: var(--bs-blue-gray-900);
+    border-color: var(--bs-blue-gray-900);
   }
-
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  
+  .btn-outline-primary {
+    color: var(--bs-blue-gray-700);
+    border-color: var(--bs-blue-gray-700);
   }
-
-  .animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .btn-outline-primary:hover {
+    background-color: var(--bs-blue-gray-700);
+    border-color: var(--bs-blue-gray-700);
   }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-{% if page.hero_section %}
-  {% for block in page.hero_section %}
-    <section class="hero-section" 
-             {% if block.value.background_image %}{% image block.value.background_image fill-1920x1080 as bg_image %}style="background-image: url('{{ bg_image.url }}');"{% endif %}>
-      <div class="hero-overlay"></div>
-      <div class="hero-content container">
-        <h1 class="display-3 fw-bold mb-3">{{ block.value.headline }}</h1>
-        {% if block.value.subheadline %}
-          <p class="lead mb-4">{{ block.value.subheadline }}</p>
-        {% endif %}
-        {% if block.value.cta_text and block.value.cta_link %}
-          <a href="{{ block.value.cta_link }}" class="btn btn-light btn-lg px-4 py-2 fw-bold">{{ block.value.cta_text }}</a>
-        {% endif %}
-      </div>
-    </section>
-  {% endfor %}
-{% endif %}
-
-<!-- Services Overview -->
-{% if page.services_overview %}
-  <section class="services-section py-5 bg-light">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-12 text-center">
-          <h2 class="display-5 fw-bold mb-3">Our Services</h2>
-          <p class="lead text-muted">Discover the range of services we offer to help your business thrive</p>
-        </div>
-      </div>
-      <div class="row g-4">
-        {% for block in page.services_overview %}
-          <div class="col-lg-3 col-md-6 animate-on-scroll">
-            <div class="card service-card h-100 border-0 shadow-sm p-4">
-              {% if block.value.icon %}
-                {% image block.value.icon fill-100x100 as service_icon %}
-                <img src="{{ service_icon.url }}" alt="{{ block.value.title }}" class="service-icon mb-3 mx-auto">
-              {% else %}
-                <i class="bi bi-grid service-icon text-center d-block"></i>
-              {% endif %}
-              <h3 class="h5 fw-bold text-center">{{ block.value.title }}</h3>
-              <p class="text-muted text-center">{{ block.value.description }}</p>
-              {% if block.value.link %}
-                <a href="{% pageurl block.value.link %}" class="btn btn-outline-primary w-100 mt-auto">Learn more</a>
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-{% endif %}
-
-<!-- About Preview -->
-{% if page.about_preview %}
-  <section class="about-section py-5">
-    <div class="container">
-      <div class="row align-items-center">
-        {% for block in page.about_preview %}
-          <div class="col-lg-6 animate-on-scroll">
-            {{ block.value.summary_text|richtext }}
-            <a href="{% url 'about' %}" class="btn btn-primary mt-3">Learn More About Us</a>
-          </div>
-          {% if block.value.image %}
-            <div class="col-lg-6 animate-on-scroll">
-              {% image block.value.image width-500 class="img-fluid rounded shadow" %}
-            </div>
+  <!-- Hero Banner -->
+  {% if page.hero_section %}
+    {% for block in page.hero_section %}
+      <section class="hero-section" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h1 class="display-3 fw-bold mb-3">{{ block.value.headline }}</h1>
+          {% if block.value.subheadline %}
+            <p class="lead mb-4">{{ block.value.subheadline }}</p>
           {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-{% endif %}
-
-<!-- Key Stats Section -->
-{% if page.key_stats %}
-  <section class="stats-section py-5">
-    <div class="container">
-      <div class="row text-center">
-        {% for block in page.key_stats %}
-          <div class="col-lg-3 col-md-6 mb-4 animate-on-scroll">
-            <div class="stat-item">
-              <div class="stat-number" data-count="{{ block.value.number }}">0</div>
-              <div class="stat-label h5">{{ block.value.label }}</div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-{% endif %}
-
-<!-- Testimonials Slider -->
-{% if page.testimonials_slider %}
-  <section class="testimonials-section py-5 bg-light">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-12 text-center">
-          <h2 class="display-5 fw-bold mb-3">What Our Clients Say</h2>
-          <p class="lead text-muted">Don't just take our word for it - hear from our satisfied clients</p>
+          {% if block.value.cta_text and block.value.cta_link %}
+            <a href="{{ block.value.cta_link }}" class="btn btn-primary btn-lg px-4 py-2">{{ block.value.cta_text }}</a>
+          {% endif %}
         </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-12">
-          <div class="swiper testimonials-swiper">
-            <div class="swiper-wrapper">
-              {% for block in page.testimonials_slider %}
-                <div class="swiper-slide">
-                  <div class="card testimonial-card h-100 border-0 p-4 mx-2">
-                    <div class="card-body">
-                      <p class="card-text fst-italic">"{{ block.value.testimonial.quote }}"</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                      <div class="d-flex align-items-center">
-                        {% if block.value.testimonial.image %}
-                          {% image block.value.testimonial.image fill-60x60 class="rounded-circle me-3" %}
-                        {% else %}
-                          <div class="bg-secondary rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                            <i class="bi bi-person text-white"></i>
-                          </div>
-                        {% endif %}
-                        <div>
-                          <h5 class="mb-0">{{ block.value.testimonial.name }}</h5>
-                          {% if block.value.testimonial.role %}
-                            <p class="text-muted mb-0">{{ block.value.testimonial.role }}</p>
-                          {% endif %}
-                          {% if block.value.testimonial.company %}
-                            <p class="text-muted mb-0">{{ block.value.testimonial.company }}</p>
-                          {% endif %}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-{% endif %}
+        {% if block.value.background_image %}
+          {% image block.value.background_image fill-1920x1080 as bg_image %}
+          <div class="hero-background" style="background-image: url('{{ bg_image.url }}');"></div>
+        {% endif %}
+      </section>
+    {% endfor %}
+  {% endif %}
 
-<!-- Partners Section -->
-{% if page.partners_carousel %}
-  <section class="partners-section py-5">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-12 text-center">
-          <h2 class="display-5 fw-bold mb-3">Our Partners</h2>
-          <p class="lead text-muted">Trusted by industry leaders and innovators</p>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="col-12">
-          <div class="swiper partners-swiper">
-            <div class="swiper-wrapper align-items-center">
-              {% for block in page.partners_carousel %}
-                <div class="swiper-slide">
-                  <div class="text-center p-3">
-                    {% if block.value.partner.logo %}
-                      {% image block.value.partner.logo fill-200x100 class="partner-logo img-fluid" %}
-                    {% else %}
-                      <div class="bg-light py-5 rounded">
-                        <h5 class="text-muted">{{ block.value.partner.name }}</h5>
-                      </div>
-                    {% endif %}
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-{% endif %}
-
-<!-- Blog Highlights -->
-{% if page.blog_highlights %}
-  <section class="blog-section py-5 bg-light">
-    <div class="container">
-      {% for block in page.blog_highlights %}
+  <!-- Services Overview -->
+  {% if page.services_overview %}
+    <section class="services-section py-5" id="services">
+      <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
-            <h2 class="display-5 fw-bold mb-3">{{ block.value.title }}</h2>
-            <p class="lead text-muted">Stay updated with our latest insights and news</p>
+            <h2 class="display-5 fw-bold mb-3">Our Services</h2>
+            <p class="lead text-muted">Discover how we can help transform your business with cutting-edge technology solutions</p>
           </div>
         </div>
-      {% endfor %}
-      
-      <div class="row g-4">
-        <!-- This would typically query the latest 3 BlogPage instances -->
-        <!-- For demonstration, showing placeholder cards -->
-        <div class="col-lg-4 col-md-6 animate-on-scroll">
-          <div class="card blog-card h-100 border-0 shadow-sm">
-            <div class="bg-light" style="height: 200px;"></div>
-            <div class="card-body">
-              <span class="badge bg-primary mb-2">Technology</span>
-              <h3 class="h5 fw-bold">Latest Industry Trends</h3>
-              <p class="text-muted">Discover the latest trends shaping our industry and how we're adapting.</p>
-              <a href="#" class="btn btn-outline-primary">Read More</a>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          {% for block in page.services_overview %}
+            <div class="col">
+              <div class="card service-card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex flex-column text-center">
+                  <div class="service-icon-wrapper mb-4 d-flex justify-content-center">
+                    {% if block.value.icon %}
+                      {% image block.value.icon fill-80x80 as service_icon %}
+                      <img src="{{ service_icon.url }}" alt="{{ block.value.title }}" class="img-fluid">
+                    {% else %}
+                      <!-- Default Bootstrap Icon -->
+                      <i class="bi bi-gear-wide-connected text-primary" style="font-size: 3rem;"></i>
+                    {% endif %}
+                  </div>
+                  <h3 class="card-title fw-bold">{{ block.value.title }}</h3>
+                  <p class="card-text text-muted flex-grow-1">{{ block.value.description }}</p>
+                  {% if block.value.link %}
+                    <a href="{% pageurl block.value.link %}" class="btn btn-outline-primary mt-auto">Learn More</a>
+                  {% endif %}
+                </div>
+              </div>
             </div>
-          </div>
+          {% endfor %}
         </div>
-        <div class="col-lg-4 col-md-6 animate-on-scroll">
-          <div class="card blog-card h-100 border-0 shadow-sm">
-            <div class="bg-light" style="height: 200px;"></div>
-            <div class="card-body">
-              <span class="badge bg-success mb-2">Company News</span>
-              <h3 class="h5 fw-bold">Global Ace Expansion</h3>
-              <p class="text-muted">We're excited to announce our expansion into new markets.</p>
-              <a href="#" class="btn btn-outline-primary">Read More</a>
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- About Summary -->
+  {% if page.about_preview %}
+    <section class="about-section py-5 section-bg" id="about">
+      <div class="container">
+        {% for block in page.about_preview %}
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <h2 class="display-5 fw-bold mb-4">About Global Ace Technology</h2>
+              <div class="about-content">
+                {{ block.value.summary_text|richtext }}
+              </div>
+              <a href="/about/" class="btn btn-primary">Learn More About Us</a>
             </div>
+            {% if block.value.image %}
+              <div class="col-lg-6 mt-4 mt-lg-0">
+                {% image block.value.image width-600 class="img-fluid rounded shadow" %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Industries Served -->
+  {% if page.industries_served %}
+    <section class="industries-section py-5" id="industries">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center">
+            <h2 class="display-5 fw-bold mb-3">Industries We Serve</h2>
+            <p class="lead text-muted">Our expertise spans across multiple sectors, delivering tailored solutions for each industry</p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 animate-on-scroll">
-          <div class="card blog-card h-100 border-0 shadow-sm">
-            <div class="bg-light" style="height: 200px;"></div>
-            <div class="card-body">
-              <span class="badge bg-warning mb-2">Case Study</span>
-              <h3 class="h5 fw-bold">Client Success Story</h3>
-              <p class="text-muted">How we helped a client achieve 200% growth in 6 months.</p>
-              <a href="#" class="btn btn-outline-primary">Read More</a>
+        
+        <div class="row row-cols-2 row-cols-md-4 g-4">
+          {% for block in page.industries_served %}
+            <div class="col">
+              <div class="card industry-card h-100 border-0 shadow-sm text-center">
+                <div class="card-body">
+                  <div class="industry-icon-wrapper mb-3">
+                    {% if block.value.logo_or_icon %}
+                      {% image block.value.logo_or_icon fill-80x80 as industry_icon %}
+                      <img src="{{ industry_icon.url }}" alt="{{ block.value.name }}" class="img-fluid">
+                    {% else %}
+                      <!-- Default Bootstrap Icon -->
+                      <i class="bi bi-building text-primary" style="font-size: 3rem;"></i>
+                    {% endif %}
+                  </div>
+                  <h3 class="card-title h5 fw-bold">{{ block.value.name }}</h3>
+                  {% if block.value.description %}
+                    <p class="card-text text-muted small">{{ block.value.description }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Case Studies / Projects Highlight -->
+  {% if page.case_studies %}
+    <section class="projects-section py-5 section-bg" id="projects">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center">
+            <h2 class="display-5 fw-bold mb-3">Featured Projects</h2>
+            <p class="lead text-muted">Explore our successful implementations across various industries</p>
+          </div>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          {% for block in page.case_studies %}
+            <div class="col">
+              <div class="card project-card h-100 border-0 shadow-sm">
+                {% if block.value.project_image %}
+                  {% image block.value.project_image fill-400x250 as project_image %}
+                  <img src="{{ project_image.url }}" class="card-img-top" alt="{{ block.value.project_title }}">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                  <h3 class="card-title fw-bold">{{ block.value.project_title }}</h3>
+                  {% if block.value.client_name %}
+                    <p class="text-muted small">Client: {{ block.value.client_name }}</p>
+                  {% endif %}
+                  <p class="card-text flex-grow-1">{{ block.value.short_description }}</p>
+                  {% if block.value.project_link %}
+                    <a href="{% pageurl block.value.project_link %}" class="btn btn-outline-primary mt-auto">View Case Study</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Key Stats -->
+  {% if page.key_stats %}
+    <section class="stats-section py-5" id="stats">
+      <div class="container">
+        <div class="row text-center">
+          {% for block in page.key_stats %}
+            <div class="col-md-3 col-6 mb-4 mb-md-0">
+              <div class="stat-item">
+                <div class="stat-number">{{ block.value.number }}</div>
+                <div class="stat-label">{{ block.value.label }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Testimonials -->
+  {% if page.testimonials_slider %}
+    <section class="testimonials-section py-5" id="testimonials">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-12 text-center">
+            <h2 class="display-5 fw-bold mb-3">What Our Clients Say</h2>
+            <p class="lead text-muted">Don't just take our word for it - hear from our satisfied clients</p>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-12">
+            <div class="swiper testimonials-swiper">
+              <div class="swiper-wrapper">
+                {% for block in page.testimonials_slider %}
+                  <div class="swiper-slide">
+                    <div class="card testimonial-card h-100 border-0 shadow-sm">
+                      <div class="card-body d-flex flex-column">
+                        <blockquote class="blockquote flex-grow-1">
+                          <p class="testimonial-quote">"{{ block.value.testimonial.quote }}"</p>
+                        </blockquote>
+                        <footer class="mt-auto">
+                          <div class="d-flex align-items-center">
+                            <div class="testimonial-image-wrapper me-3">
+                              {% if block.value.testimonial.image %}
+                                {% image block.value.testimonial.image fill-60x60 class="rounded-circle" %}
+                              {% else %}
+                                <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 60px; height: 60px;">
+                                  <i class="bi bi-person-fill"></i>
+                                </div>
+                              {% endif %}
+                            </div>
+                            <div>
+                              <div class="fw-bold">{{ block.value.testimonial.name }}</div>
+                              {% if block.value.testimonial.role %}
+                                <div class="small text-muted">{{ block.value.testimonial.role }}</div>
+                              {% endif %}
+                              {% if block.value.testimonial.company %}
+                                <div class="small text-muted">{{ block.value.testimonial.company }}</div>
+                              {% endif %}
+                            </div>
+                          </div>
+                        </footer>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="swiper-pagination testimonials-pagination mt-4"></div>
+              <div class="swiper-button-next testimonials-next"></div>
+              <div class="swiper-button-prev testimonials-prev"></div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-{% endif %}
+    </section>
+  {% endif %}
 
-<!-- Final Call-to-Action -->
-{% if page.final_cta %}
-  <section class="cta-section py-5">
-    <div class="container">
-      {% for block in page.final_cta %}
-        <div class="row justify-content-center text-center">
-          <div class="col-lg-8">
-            <h2 class="display-5 fw-bold mb-3">{{ block.value.headline }}</h2>
-            {% if block.value.subheadline %}
-              <p class="lead mb-4">{{ block.value.subheadline }}</p>
-            {% endif %}
-            <a href="{{ block.value.cta_link }}" class="btn btn-light btn-lg px-4 py-2 fw-bold">{{ block.value.cta_text }}</a>
+  <!-- Latest News or Insights -->
+  {% if page.latest_news %}
+    <section class="blog-section py-5 section-bg" id="news">
+      <div class="container">
+        {% for block in page.latest_news %}
+          <div class="row mb-5">
+            <div class="col-12 text-center">
+              <h2 class="display-5 fw-bold mb-3">{{ block.value.title }}</h2>
+              <p class="lead text-muted">Stay updated with our latest insights and industry news</p>
+            </div>
+          </div>
+        {% endfor %}
+        
+        <!-- This would typically query the latest 3 BlogPage instances -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <!-- Placeholder for blog posts - would be dynamically populated -->
+          <div class="col">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title">Latest Industry Insights</h3>
+                <p class="card-text">Stay tuned for our latest articles on technology trends and business solutions.</p>
+                <a href="/blog/" class="btn btn-outline-primary">View All Articles</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title">Technology Updates</h3>
+                <p class="card-text">Learn about the latest developments in our technology stack and implementations.</p>
+                <a href="/blog/" class="btn btn-outline-primary">View All Articles</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title">Company News</h3>
+                <p class="card-text">Read about our company milestones, partnerships, and team achievements.</p>
+                <a href="/blog/" class="btn btn-outline-primary">View All Articles</a>
+              </div>
+            </div>
           </div>
         </div>
-      {% endfor %}
-    </div>
-  </section>
-{% endif %}
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- Call-To-Action -->
+  {% if page.call_to_action %}
+    <section class="cta-section py-5" id="contact">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            {% for block in page.call_to_action %}
+              <h2 class="display-5 fw-bold mb-3">{{ block.value.headline }}</h2>
+              {% if block.value.subheadline %}
+                <p class="lead mb-4">{{ block.value.subheadline }}</p>
+              {% endif %}
+              <a href="{{ block.value.cta_link }}" class="btn btn-light btn-lg px-4 py-2">{{ block.value.cta_text }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
 {% endblock %}
 
 {% block extra_js %}
@@ -377,108 +426,34 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<!-- Custom JS -->
 <script>
-  // Initialize Swiper for testimonials
-  document.addEventListener('DOMContentLoaded', function() {
-    const testimonialsSwiper = new Swiper('.testimonials-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 30,
-      loop: true,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      breakpoints: {
-        768: {
-          slidesPerView: 2,
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Swiper for testimonials
+    var testimonialSwiper = new Swiper('.testimonials-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
         },
-        992: {
-          slidesPerView: 3,
-        }
-      }
-    });
-
-    // Initialize Swiper for partners
-    const partnersSwiper = new Swiper('.partners-swiper', {
-      slidesPerView: 2,
-      spaceBetween: 30,
-      loop: true,
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-      },
-      breakpoints: {
-        576: {
-          slidesPerView: 3,
+        pagination: {
+            el: '.testimonials-pagination',
+            clickable: true,
         },
-        768: {
-          slidesPerView: 4,
+        navigation: {
+            nextEl: '.testimonials-next',
+            prevEl: '.testimonials-prev',
         },
-        992: {
-          slidesPerView: 6,
-        }
-      }
+        breakpoints: {
+            768: {
+                slidesPerView: 2,
+            },
+            992: {
+                slidesPerView: 3,
+            },
+        },
     });
-
-    // Animated counters
-    function animateCounters() {
-      const counters = document.querySelectorAll('.stat-number');
-      counters.forEach(counter => {
-        const target = +counter.getAttribute('data-count');
-        const duration = 2000; // ms
-        const increment = target / (duration / 16); // 60fps
-        let current = 0;
-        
-        const updateCounter = () => {
-          current += increment;
-          if (current < target) {
-            counter.innerText = Math.ceil(current);
-            setTimeout(updateCounter, 16);
-          } else {
-            counter.innerText = target;
-          }
-        };
-        
-        updateCounter();
-      });
-    }
-
-    // Intersection Observer for animations
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          if (entry.target.classList.contains('stat-number')) {
-            animateCounters();
-          }
-        }
-      });
-    }, observerOptions);
-
-    // Observe elements with animate-on-scroll class
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Animate stats immediately if they're in view on page load
-    document.querySelectorAll('.stats-section .animate-on-scroll').forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom >= 0) {
-        el.classList.add('visible');
-        animateCounters();
-      }
-    });
-  });
+});
 </script>
 {% endblock %}
