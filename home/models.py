@@ -226,6 +226,39 @@ class HomePage(Page):
     ], use_json_field=True, blank=True)
 
     # SEO fields
+    og_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text=_('Image to be used for social media sharing (Open Graph and Twitter cards)')
+    )
+    twitter_card_type = models.CharField(
+        max_length=50,
+        blank=True,
+        choices=[
+            ('summary', 'Summary'),
+            ('summary_large_image', 'Summary with Large Image'),
+        ],
+        default='summary_large_image',
+        help_text=_('Type of Twitter card to use')
+    )
+
+    # SEO methods
+    def get_seo_title(self):
+        return self.seo_title or self.title
+
+    def get_seo_description(self):
+        return self.search_description
+
+    def get_og_image(self):
+        return self.og_image
+
+    def get_twitter_card_type(self):
+        return self.twitter_card_type or 'summary_large_image'
+
+    # Search index configuration
     search_fields = Page.search_fields + [
         index.SearchField('hero_section'),
         index.SearchField('services_overview'),
@@ -246,5 +279,7 @@ class HomePage(Page):
     promote_panels = [
         FieldPanel('seo_title'),
         FieldPanel('search_description'),
+        FieldPanel('og_image'),
+        FieldPanel('twitter_card_type'),
         FieldPanel('slug'),
     ]
