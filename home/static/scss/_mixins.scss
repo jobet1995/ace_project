@@ -1,0 +1,266 @@
+// =============================================================================
+// Mixins
+// =============================================================================
+
+@use "sass:color";
+
+// Gradient Backgrounds
+@mixin gradient-background($direction: 135deg, $color1: $primary-color, $color2: $secondary-color) {
+  background: linear-gradient($direction, $color1, $color2);
+}
+
+// Responsive Grid System
+@mixin grid-system($columns: 12, $gutter: $spacing-lg) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gutter;
+}
+
+@mixin responsive-grid($min-width: 300px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: 2rem;
+}
+
+// Button Styles with Hover Transitions
+@mixin button-style($bg-color: #0B3D91, $text-color: #FFFFFF, $hover-bg: color.scale($bg-color, $lightness: -10%)) {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: $bg-color;
+  color: $text-color;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  text-align: center;
+  
+  &:hover,
+  &:focus {
+    background-color: $hover-bg;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:focus {
+    @include focus-outline();
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Animated Counters
+@mixin animated-counter() {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+// Timeline Effects
+@mixin timeline-effect() {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: #0B3D91;
+  }
+}
+
+// Testimonial Carousel Styling
+@mixin testimonial-carousel() {
+  .testimonial-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 100%;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+  }
+  
+  .blockquote {
+    position: relative;
+    margin: 0 0 2rem 0;
+    padding: 0 0 0 2rem;
+    font-style: italic;
+    font-size: 1.125rem;
+    line-height: 1.75;
+    
+    &::before {
+      content: '"';
+      position: absolute;
+      left: -0.5rem;
+      top: -1rem;
+      font-size: 4rem;
+      color: #0B3D91;
+      opacity: 0.2;
+      font-family: Georgia, serif;
+    }
+  }
+  
+  // Navigation Arrows
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #0B3D91;
+    background: rgba(255, 255, 255, 0.8);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+    
+    &::after {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+    &:hover {
+      background: #FFFFFF;
+      transform: scale(1.1);
+    }
+  }
+  
+  // Pagination
+  .swiper-pagination-bullet {
+    background: #0B3D91;
+    opacity: 0.5;
+    width: 12px;
+    height: 12px;
+    transition: all 0.2s ease-in-out;
+    
+    &-active {
+      opacity: 1;
+      background: #0B3D91;
+      transform: scale(1.2);
+    }
+  }
+}
+
+// Partner Logos Hover Effect (Grayscale to Color)
+@mixin partner-logo-hover() {
+  filter: grayscale(100%);
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+}
+
+// Card Hover Effect
+@mixin card-hover-effect() {
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+// Section Fade In Animation
+@mixin section-fade-in() {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Focus States for Accessibility
+@mixin focus-outline() {
+  &:focus {
+    outline: 2px solid #00A3E0;
+    outline-offset: 2px;
+  }
+}
+
+// Media Queries
+@mixin media-breakpoint-up($breakpoint) {
+  @if $breakpoint == "xs" {
+    @media (min-width: $breakpoint-xs) { @content; }
+  } @else if $breakpoint == "sm" {
+    @media (min-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == "md" {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == "lg" {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == "xl" {
+    @media (min-width: $breakpoint-xl) { @content; }
+  } @else if $breakpoint == "xxl" {
+    @media (min-width: $breakpoint-xxl) { @content; }
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint) {
+  @if $breakpoint == "xs" {
+    @media (max-width: ($breakpoint-sm - 0.02)) { @content; }
+  } @else if $breakpoint == "sm" {
+    @media (max-width: ($breakpoint-md - 0.02)) { @content; }
+  } @else if $breakpoint == "md" {
+    @media (max-width: ($breakpoint-lg - 0.02)) { @content; }
+  } @else if $breakpoint == "lg" {
+    @media (max-width: ($breakpoint-xl - 0.02)) { @content; }
+  } @else if $breakpoint == "xl" {
+    @media (max-width: ($breakpoint-xxl - 0.02)) { @content; }
+  } @else if $breakpoint == "xxl" {
+    @media (max-width: $breakpoint-xxl) { @content; }
+  }
+}
+
+// Clearfix
+@mixin clearfix() {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+// Visually Hidden (for accessibility)
+@mixin visually-hidden() {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Truncate text
+@mixin text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

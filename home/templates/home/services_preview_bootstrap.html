@@ -1,0 +1,138 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<!-- Bootstrap 5 Services Preview Section -->
+<section class="services-preview-section py-5 bg-light">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="display-5 fw-bold mb-3">Our IT Consulting Services</h2>
+        <p class="lead text-muted">Discover how we can help transform your business with cutting-edge technology solutions</p>
+      </div>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <!-- Service 1 -->
+      <div class="col">
+        <div class="card service-preview-card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column text-center">
+            <div class="service-icon-wrapper mb-4 d-flex justify-content-center">
+              <!-- Font Awesome Icon -->
+              <i class="fas fa-cloud fa-3x text-primary"></i>
+            </div>
+            <h3 class="card-title fw-bold">Cloud Solutions</h3>
+            <p class="card-text text-muted flex-grow-1">Migrate and optimize your infrastructure to the cloud for scalability, security, and cost-efficiency.</p>
+            <a href="#" class="btn btn-outline-primary mt-auto">Learn More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Service 2 -->
+      <div class="col">
+        <div class="card service-preview-card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column text-center">
+            <div class="service-icon-wrapper mb-4 d-flex justify-content-center">
+              <!-- Font Awesome Icon -->
+              <i class="fas fa-shield-alt fa-3x text-primary"></i>
+            </div>
+            <h3 class="card-title fw-bold">Cyber Security</h3>
+            <p class="card-text text-muted flex-grow-1">Protect your business from threats with our comprehensive security assessments and solutions.</p>
+            <a href="#" class="btn btn-outline-primary mt-auto">Learn More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Service 3 -->
+      <div class="col">
+        <div class="card service-preview-card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column text-center">
+            <div class="service-icon-wrapper mb-4 d-flex justify-content-center">
+              <!-- Font Awesome Icon -->
+              <i class="fas fa-database fa-3x text-primary"></i>
+            </div>
+            <h3 class="card-title fw-bold">Data Analytics</h3>
+            <p class="card-text text-muted flex-grow-1">Transform your data into actionable insights with our advanced analytics and visualization tools.</p>
+            <a href="#" class="btn btn-outline-primary mt-auto">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mt-5">
+      <div class="col-12 text-center">
+        <a href="/services/" class="btn btn-primary btn-lg">View All Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Required CSS (include in your base template or page) -->
+<style>
+  /* Services Preview Section Styles */
+  .services-preview-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+  
+  .service-preview-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .service-preview-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0d6efd, #6610f2);
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: left;
+  }
+  
+  .service-preview-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+  
+  .service-preview-card:hover:before {
+    transform: scaleX(1);
+  }
+  
+  .service-icon-wrapper {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .fa-3x {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  .service-preview-card:hover .fa-3x {
+    transform: scale(1.15) rotate(5deg);
+  }
+  
+  .card-title {
+    transition: color 0.3s;
+  }
+  
+  .service-preview-card:hover .card-title {
+    color: #0d6efd;
+  }
+  
+  @media (max-width: 768px) {
+    .service-preview-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .service-preview-card:hover .fa-3x {
+      transform: scale(1.1);
+    }
+  }
+</style>

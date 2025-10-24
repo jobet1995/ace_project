@@ -1,0 +1,208 @@
+// =============================================================================
+// Typography
+// =============================================================================
+
+@use "variables" as *;
+
+// Base Typography
+html {
+  font-size: 16px; // Base font size
+}
+
+body {
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $text-color;
+  font-weight: $font-weight-normal;
+}
+
+// Extra font weight classes
+.fw-light { font-weight: $font-weight-light !important; }
+.fw-medium { font-weight: $font-weight-medium !important; }
+.fw-semibold { font-weight: $font-weight-semibold !important; }
+.fw-bold { font-weight: $font-weight-bold !important; }
+.fw-black { font-weight: $font-weight-black !important; }
+
+// Extra font size classes
+.fs-xs { font-size: $font-size-xs !important; }
+.fs-sm { font-size: $font-size-sm !important; }
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-secondary;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-sm;
+  margin-top: 0;
+  margin-bottom: $spacing-base;
+  color: $primary-color;
+}
+
+// Extra line height classes
+.lh-xs { line-height: $line-height-xs !important; }
+.lh-base { line-height: $line-height-base !important; }
+.lh-lg { line-height: $line-height-lg !important; }
+.lh-xl { line-height: $line-height-xl !important; }
+
+h1 {
+  font-size: $font-size-display;
+  line-height: $line-height-xs;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-xxxl;
+  }
+}
+
+h2 {
+  font-size: $font-size-xxxl;
+  line-height: $line-height-xs;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-xxl;
+  }
+}
+
+h3 {
+  font-size: $font-size-xxl;
+  line-height: $line-height-sm;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-xl;
+  }
+}
+
+h4 {
+  font-size: $font-size-xl;
+  line-height: $line-height-sm;
+}
+
+h5 {
+  font-size: $font-size-lg;
+  line-height: $line-height-base;
+}
+
+h6 {
+  font-size: $font-size-md;
+  line-height: $line-height-base;
+}
+
+// Paragraphs
+p {
+  margin-top: 0;
+  margin-bottom: $spacing-base;
+  line-height: $line-height-lg;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Links
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: $transition-base;
+  
+  &:hover,
+  &:focus {
+    color: $secondary-color;
+    text-decoration: underline;
+  }
+  
+  &:focus {
+    outline: 2px solid $secondary-color;
+    outline-offset: 2px;
+  }
+}
+
+// Lists
+ul, ol {
+  margin-top: 0;
+  margin-bottom: $spacing-base;
+  padding-left: $spacing-lg;
+  
+  li {
+    margin-bottom: $spacing-xs;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Definition Lists
+dl {
+  margin-top: 0;
+  margin-bottom: $spacing-base;
+}
+
+dt {
+  font-weight: $font-weight-bold;
+}
+
+dd {
+  margin-left: 0;
+  margin-bottom: $spacing-base;
+}
+
+// Blockquotes
+blockquote {
+  margin: 0 0 $spacing-base 0;
+  padding: 0 0 0 $spacing-lg;
+  font-style: italic;
+  font-size: $font-size-md;
+  line-height: $line-height-lg;
+  position: relative;
+  color: $text-color;
+  
+  &::before {
+    content: '"';
+    font-size: 4rem;
+    position: absolute;
+    left: -0.5rem;
+    top: -1rem;
+    color: $primary-color;
+    opacity: 0.2;
+    font-family: Georgia, serif;
+  }
+  
+  p {
+    margin-bottom: $spacing-base;
+  }
+  
+  cite {
+    display: block;
+    font-size: $font-size-sm;
+    font-style: normal;
+    color: $light-text;
+    
+    &::before {
+      content: "— ";
+    }
+  }
+}
+
+// Code
+code {
+  font-family: $font-family-monospace;
+  font-size: $font-size-sm;
+  padding: $spacing-xxs $spacing-xs;
+  background-color: rgba($primary-color, 0.1);
+  border-radius: $border-radius-sm;
+  color: $primary-color;
+}
+
+pre {
+  font-family: $font-family-monospace;
+  font-size: $font-size-sm;
+  padding: $spacing-base;
+  background-color: $background-color;
+  border-radius: $border-radius-base;
+  overflow-x: auto;
+  
+  code {
+    padding: 0;
+    background-color: transparent;
+    color: inherit;
+  }
+}

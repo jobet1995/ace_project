@@ -1,0 +1,205 @@
+// =============================================================================
+// Components
+// =============================================================================
+
+@use "sass:color";
+@use "variables" as *;
+
+// Buttons
+.btn {
+  @include button-style();
+  
+  &.btn-secondary {
+    @include button-style($secondary-color, $white, color.scale($secondary-color, $lightness: -10%));
+  }
+  
+  &.btn-accent {
+    @include button-style($accent-color, $white, color.scale($accent-color, $lightness: -10%));
+  }
+  
+  &.btn-outline {
+    @include button-style(transparent, $primary-color, $background-color);
+    border: 2px solid $primary-color;
+    
+    &:hover,
+    &:focus {
+      color: $white;
+    }
+  }
+  
+  &.btn-outline-secondary {
+    @include button-style(transparent, $secondary-color, rgba($secondary-color, 0.1));
+    border: 2px solid $secondary-color;
+    
+    &:hover,
+    &:focus {
+      color: $white;
+    }
+  }
+  
+  &.btn-lg {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+  }
+  
+  &.btn-sm {
+    padding: $spacing-xs $spacing-base;
+    font-size: $font-size-sm;
+  }
+  
+  &.btn-block {
+    display: block;
+    width: 100%;
+  }
+}
+
+// Transition utility classes
+.transition-fast { transition: $transition-fast !important; }
+.transition-slow { transition: $transition-slow !important; }
+.transition-bounce { transition: $transition-bounce !important; }
+
+// Cards
+.card {
+  background: $white;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  transition: $transition-base;
+  
+  @include card-hover-effect();
+  
+  .card-body {
+    padding: $spacing-lg;
+  }
+  
+  .card-title {
+    margin-bottom: $spacing-sm;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+  }
+  
+  .card-text {
+    color: $light-text;
+    line-height: $line-height-lg;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// Border radius utility classes
+.rounded-sm { border-radius: $border-radius-sm !important; }
+.rounded-base { border-radius: $border-radius-base !important; }
+.rounded-lg { border-radius: $border-radius-lg !important; }
+.rounded-xl { border-radius: $border-radius-xl !important; }
+.rounded-pill { border-radius: $border-radius-pill !important; }
+.rounded-circle { border-radius: $border-radius-circle !important; }
+
+// Shadow utility classes
+.shadow-xs { box-shadow: $shadow-xs !important; }
+.shadow-base { box-shadow: $shadow-base !important; }
+.shadow-md { box-shadow: $shadow-md !important; }
+.shadow-lg { box-shadow: $shadow-lg !important; }
+.shadow-xl { box-shadow: $shadow-xl !important; }
+.shadow-inner { box-shadow: $shadow-inner !important; }
+
+// Forms
+.form-group {
+  margin-bottom: $spacing-md;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: $spacing-xs;
+  font-weight: $font-weight-medium;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: $spacing-sm $spacing-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $text-color;
+  background-color: $white;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: $border-radius-sm;
+  transition: $transition-base;
+  
+  &:focus {
+    color: $text-color;
+    background-color: $white;
+    border-color: $secondary-color;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($secondary-color, 0.25);
+  }
+  
+  &::placeholder {
+    color: $light-text;
+    opacity: 1;
+  }
+}
+
+// Alerts
+.alert {
+  position: relative;
+  padding: $spacing-base $spacing-base;
+  margin-bottom: $spacing-base;
+  border: 1px solid transparent;
+  border-radius: $border-radius-base;
+  
+  &.alert-success {
+    color: color.scale($success-color, $lightness: -20%);
+    background-color: color.scale($success-color, $lightness: 80%);
+    border-color: color.scale($success-color, $lightness: 70%);
+  }
+  
+  &.alert-info {
+    color: color.scale($info-color, $lightness: -20%);
+    background-color: color.scale($info-color, $lightness: 80%);
+    border-color: color.scale($info-color, $lightness: 70%);
+  }
+  
+  &.alert-warning {
+    color: color.scale($warning-color, $lightness: -20%);
+    background-color: color.scale($warning-color, $lightness: 80%);
+    border-color: color.scale($warning-color, $lightness: 70%);
+  }
+  
+  &.alert-error {
+    color: color.scale($error-color, $lightness: -20%);
+    background-color: color.scale($error-color, $lightness: 80%);
+    border-color: color.scale($error-color, $lightness: 70%);
+  }
+}
+
+// Badges
+.badge {
+  display: inline-block;
+  padding: $spacing-xxs $spacing-xs;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: $border-radius-pill;
+  
+  &.badge-primary {
+    color: $white;
+    background-color: $primary-color;
+  }
+  
+  &.badge-secondary {
+    color: $white;
+    background-color: $secondary-color;
+  }
+  
+  &.badge-accent {
+    color: $white;
+    background-color: $accent-color;
+  }
+}

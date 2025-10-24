@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home_page.css' %}">
+{% endblock %}
+
+{% block content %}
+    {# Hero Section #}
+    {% if page.hero_section %}
+        {% for block in page.hero_section %}
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>{{ block.value.headline }}</h1>
+                    {% if block.value.subheadline %}
+                        <p>{{ block.value.subheadline }}</p>
+                    {% endif %}
+                    {% if block.value.cta_text and block.value.cta_link %}
+                        <a href="{{ block.value.cta_link }}" class="cta-button">{{ block.value.cta_text }}</a>
+                    {% endif %}
+                </div>
+                {% if block.value.background_image %}
+                    {% image block.value.background_image fill-1920x1080 as bg_image %}
+                    <div class="hero-background" style="background-image: url('{{ bg_image.url }}');"></div>
+                {% endif %}
+            </section>
+        {% endfor %}
+    {% endif %}
+
+    {# Services Overview #}
+    {% if page.services_overview %}
+        <section class="services-section">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    {% for block in page.services_overview %}
+                        <div class="service-item">
+                            {% if block.value.icon %}
+                                {% image block.value.icon fill-100x100 as service_icon %}
+                                <img src="{{ service_icon.url }}" alt="{{ block.value.title }}" class="service-icon">
+                            {% endif %}
+                            <h3>{{ block.value.title }}</h3>
+                            <p>{{ block.value.description }}</p>
+                            {% if block.value.link %}
+                                <a href="{% pageurl block.value.link %}" class="service-link">Learn more</a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# About Preview #}
+    {% if page.about_preview %}
+        <section class="about-section">
+            <div class="container">
+                {% for block in page.about_preview %}
+                    <div class="about-content">
+                        {{ block.value.summary_text|richtext }}
+                        {% if block.value.image %}
+                            {% image block.value.image width-500 class="about-image" %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+    {# Key Stats #}
+    {% if page.key_stats %}
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    {% for block in page.key_stats %}
+                        <div class="stat-item">
+                            <span class="stat-number">{{ block.value.number }}</span>
+                            <span class="stat-label">{{ block.value.label }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# Testimonials Slider #}
+    {% if page.testimonials_slider %}
+        <section class="testimonials-section">
+            <div class="container">
+                <h2>What Our Clients Say</h2>
+                <div class="testimonials-slider">
+                    {% for block in page.testimonials_slider %}
+                        <div class="testimonial-item">
+                            <blockquote>
+                                <p>{{ block.value.testimonial.quote }}</p>
+                                <footer>
+                                    {% if block.value.testimonial.image %}
+                                        {% image block.value.testimonial.image fill-60x60 class="testimonial-image" %}
+                                    {% endif %}
+                                    <div class="testimonial-author">
+                                        <strong>{{ block.value.testimonial.name }}</strong>
+                                        {% if block.value.testimonial.role %}
+                                            <span>{{ block.value.testimonial.role }}</span>
+                                        {% endif %}
+                                        {% if block.value.testimonial.company %}
+                                            <span>{{ block.value.testimonial.company }}</span>
+                                        {% endif %}
+                                    </div>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# Partners Carousel #}
+    {% if page.partners_carousel %}
+        <section class="partners-section">
+            <div class="container">
+                <h2>Our Partners</h2>
+                <div class="partners-carousel">
+                    {% for block in page.partners_carousel %}
+                        <div class="partner-item">
+                            {% if block.value.partner.logo %}
+                                {% image block.value.partner.logo fill-200x100 class="partner-logo" %}
+                            {% endif %}
+                            <h3>{{ block.value.partner.name }}</h3>
+                            {% if block.value.partner.website %}
+                                <a href="{{ block.value.partner.website }}" target="_blank">Visit Website</a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# Blog Highlights #}
+    {% if page.blog_highlights %}
+        <section class="blog-section">
+            <div class="container">
+                {% for block in page.blog_highlights %}
+                    <h2>{{ block.value.title }}</h2>
+                {% endfor %}
+                {# This would typically query the latest 3 BlogPage instances #}
+                <div class="blog-grid">
+                    {# Blog posts would be rendered here #}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# Final Call-to-Action #}
+    {% if page.final_cta %}
+        <section class="cta-section">
+            <div class="container">
+                {% for block in page.final_cta %}
+                    <div class="cta-content">
+                        <h2>{{ block.value.headline }}</h2>
+                        {% if block.value.subheadline %}
+                            <p>{{ block.value.subheadline }}</p>
+                        {% endif %}
+                        <a href="{{ block.value.cta_link }}" class="cta-button">{{ block.value.cta_text }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}

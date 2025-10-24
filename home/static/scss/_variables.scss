@@ -1,0 +1,98 @@
+// =============================================================================
+// Variables
+// =============================================================================
+
+// Brand Colors
+$primary-color: #0B3D91; // Tech Blue
+$secondary-color: #00A3E0; // Azure
+$accent-color: #FCB61A; // Accent Gold
+$background-color: #F5F7FA; // Light Neutral
+$text-color: #1A1A1A; // Dark Neutral
+$light-text: #666666;
+$white: #FFFFFF;
+$black: #000000;
+
+// State Colors
+$success-color: #28a745;
+$warning-color: #ffc107;
+$error-color: #dc3545;
+$info-color: #17a2b8;
+
+// Gradients
+$primary-gradient: linear-gradient(135deg, $primary-color, $secondary-color);
+$secondary-gradient: linear-gradient(135deg, $secondary-color, $accent-color);
+
+// Typography
+$font-family-primary: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+$font-family-secondary: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+$font-family-monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+// Font Sizes
+$font-size-xs: 0.75rem;   // 12px
+$font-size-sm: 0.875rem;  // 14px
+$font-size-base: 1rem;    // 16px
+$font-size-md: 1.125rem;  // 18px
+$font-size-lg: 1.25rem;   // 20px
+$font-size-xl: 1.5rem;    // 24px
+$font-size-xxl: 2rem;     // 32px
+$font-size-xxxl: 2.5rem;  // 40px
+$font-size-display: 3rem; // 48px
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+// Line Heights
+$line-height-xs: 1.1;
+$line-height-sm: 1.25;
+$line-height-base: 1.5;
+$line-height-lg: 1.75;
+$line-height-xl: 2;
+
+// Spacing Scale (based on 8px grid)
+$spacing-xxs: 0.25rem;  // 4px
+$spacing-xs: 0.5rem;    // 8px
+$spacing-sm: 0.75rem;   // 12px
+$spacing-base: 1rem;    // 16px
+$spacing-md: 1.5rem;    // 24px
+$spacing-lg: 2rem;      // 32px
+$spacing-xl: 3rem;      // 48px
+$spacing-xxl: 4rem;     // 64px
+$spacing-xxxl: 5rem;    // 80px
+$spacing-jumbo: 6rem;   // 96px
+
+// Breakpoints
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Border Radius
+$border-radius-sm: 4px;
+$border-radius-base: 8px;
+$border-radius-md: 12px;
+$border-radius-lg: 16px;
+$border-radius-xl: 24px;
+$border-radius-pill: 50rem;
+$border-radius-circle: 50%;
+
+// Shadows
+$shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+// Transitions
+$transition-base: all 0.2s ease-in-out;
+$transition-fast: all 0.15s ease-in-out;
+$transition-slow: all 0.3s ease-in-out;
+$transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);

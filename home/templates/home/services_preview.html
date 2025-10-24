@@ -1,0 +1,139 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<!-- Services Preview Section - Top 3 IT Consulting Services -->
+<section class="services-preview-section py-5">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="display-5 fw-bold mb-3">Our IT Consulting Services</h2>
+        <p class="lead text-muted">Discover how we can help transform your business with cutting-edge technology solutions</p>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <!-- Service 1 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="card service-preview-card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="service-icon-wrapper mb-4">
+              <!-- Font Awesome Icon -->
+              <i class="fas fa-cloud service-icon text-primary"></i>
+              <!-- Alternative SVG Icon (uncomment to use) -->
+              <!-- <svg class="service-icon text-primary" width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+              </svg> -->
+            </div>
+            <h3 class="h4 fw-bold mb-3">Cloud Solutions</h3>
+            <p class="text-muted flex-grow-1">Migrate and optimize your infrastructure to the cloud for scalability, security, and cost-efficiency.</p>
+            <a href="#" class="btn btn-outline-primary mt-auto">Learn More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Service 2 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="card service-preview-card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="service-icon-wrapper mb-4">
+              <!-- Font Awesome Icon -->
+              <i class="fas fa-shield-alt service-icon text-primary"></i>
+              <!-- Alternative SVG Icon (uncomment to use) -->
+              <!-- <svg class="service-icon text-primary" width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg> -->
+            </div>
+            <h3 class="h4 fw-bold mb-3">Cyber Security</h3>
+            <p class="text-muted flex-grow-1">Protect your business from threats with our comprehensive security assessments and solutions.</p>
+            <a href="#" class="btn btn-outline-primary mt-auto">Learn More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Service 3 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="card service-preview-card h-100 border-0 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="service-icon-wrapper mb-4">
+              <!-- Font Awesome Icon -->
+              <i class="fas fa-database service-icon text-primary"></i>
+              <!-- Alternative SVG Icon (uncomment to use) -->
+              <!-- <svg class="service-icon text-primary" width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3C8.25 3 5.25 4.25 5.25 6v12c0 1.75 3 3 6.75 3s6.75-1.25 6.75-3V6c0-1.75-3-3-6.75-3zm4.5 12c0 .5-.75 1.5-4.5 1.5s-4.5-1-4.5-1.5V9c0-.5.75-1.5 4.5-1.5s4.5 1 4.5 1.5v6zm-9-7.5c0-.5.75-1.5 4.5-1.5s4.5 1 4.5 1.5-.75 1.5-4.5 1.5-4.5-1-4.5-1.5z"/>
+              </svg> -->
+            </div>
+            <h3 class="h4 fw-bold mb-3">Data Analytics</h3>
+            <p class="text-muted flex-grow-1">Transform your data into actionable insights with our advanced analytics and visualization tools.</p>
+            <a href="#" class="btn btn-outline-primary mt-auto">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Services Preview Section Styles */
+  .services-preview-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+  
+  .service-preview-card {
+    transition: all 0.3s ease-in-out;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .service-preview-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0d6efd, #6610f2);
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+    transform-origin: left;
+  }
+  
+  .service-preview-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .service-preview-card:hover:before {
+    transform: scaleX(1);
+  }
+  
+  .service-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+  
+  .service-icon {
+    font-size: 3.5rem;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .service-preview-card:hover .service-icon {
+    transform: scale(1.1);
+  }
+  
+  .card-body {
+    padding: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 1.5rem;
+    }
+    
+    .service-icon {
+      font-size: 2.5rem;
+    }
+  }
+</style>

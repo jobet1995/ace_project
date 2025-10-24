@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home_page_modular.css' %}">
+{% endblock %}
+
+{% block content %}
+    {# Hero Section with smooth scroll #}
+    <section class="hero-section" id="hero">
+        <div class="hero-background" style="background-image: url('{% static 'images/hero-bg.jpg' %}');"></div>
+        <div class="hero-content">
+            <h1 class="fade-in">Global Ace Technology Inc</h1>
+            <p class="fade-in">Innovative Solutions for Tomorrow's Challenges</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary smooth-scroll">Our Services</a>
+                <a href="#contact" class="btn btn-secondary smooth-scroll">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    {# Navigation with mobile menu #}
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="/">Global Ace Tech</a>
+            </div>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu" aria-hidden="true">
+                <li><a href="#hero" class="smooth-scroll">Home</a></li>
+                <li><a href="#services" class="smooth-scroll">Services</a></li>
+                <li><a href="#about" class="smooth-scroll">About</a></li>
+                <li><a href="#stats" class="smooth-scroll">Stats</a></li>
+                <li><a href="#testimonials" class="smooth-scroll">Testimonials</a></li>
+                <li><a href="#partners" class="smooth-scroll">Partners</a></li>
+                <li><a href="#contact" class="smooth-scroll">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {# Services Section with animations #}
+    <section class="services-section" id="services">
+        <div class="container">
+            <h2 class="slide-up">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-item fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Custom web applications built with modern technologies.</p>
+                    <a href="#" class="service-link">Learn more</a>
+                </div>
+                <div class="service-item fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Apps</h3>
+                    <p>Cross-platform mobile applications for iOS and Android.</p>
+                    <a href="#" class="service-link">Learn more</a>
+                </div>
+                <div class="service-item fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Scalable cloud infrastructure and services.</p>
+                    <a href="#" class="service-link">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# About Section #}
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h2>About Global Ace Technology</h2>
+                    <p>We are a leading technology company specializing in innovative solutions for businesses worldwide.</p>
+                </div>
+                <div class="about-image slide-up">
+                    <img src="{% static 'images/about.jpg' %}" alt="About Global Ace Technology">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Stats Section with animated counters #}
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <h2 class="slide-up">By The Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number counter" data-target="500" data-symbol="+" data-duration="2000">0+</span>
+                    <span class="stat-label">Projects Completed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number counter" data-target="250" data-symbol="+" data-duration="2000">0+</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number counter" data-target="50" data-symbol="+" data-duration="2000">0+</span>
+                    <span class="stat-label">Team Members</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number counter" data-target="15" data-suffix="+" data-duration="2000">0+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Testimonials Section with Swiper carousel #}
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <h2 class="slide-up">What Our Clients Say</h2>
+            <div class="testimonials-container">
+                <div class="swiper testimonials-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <blockquote>
+                                    <p>"Global Ace Technology transformed our digital presence with their innovative solutions."</p>
+                                    <footer>
+                                        <img src="{% static 'images/client1.jpg' %}" alt="Client 1" class="testimonial-image">
+                                        <div class="testimonial-author">
+                                            <strong>John Smith</strong>
+                                            <span>CEO, TechCorp</span>
+                                        </div>
+                                    </footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <blockquote>
+                                    <p>"Their team delivered beyond our expectations with exceptional quality and service."</p>
+                                    <footer>
+                                        <img src="{% static 'images/client2.jpg' %}" alt="Client 2" class="testimonial-image">
+                                        <div class="testimonial-author">
+                                            <strong>Sarah Johnson</strong>
+                                            <span>Marketing Director, Innovate Inc</span>
+                                        </div>
+                                    </footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <blockquote>
+                                    <p>"Working with Global Ace has been a game-changer for our business operations."</p>
+                                    <footer>
+                                        <img src="{% static 'images/client3.jpg' %}" alt="Client 3" class="testimonial-image">
+                                        <div class="testimonial-author">
+                                            <strong>Michael Brown</strong>
+                                            <span>CTO, FutureTech</span>
+                                        </div>
+                                    </footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="testimonials-pagination swiper-pagination"></div>
+                    <!-- Add Navigation -->
+                    <div class="testimonials-navigation">
+                        <div class="testimonials-prev swiper-button-prev"></div>
+                        <div class="testimonials-next swiper-button-next"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Partners Section with carousel #}
+    <section class="partners-section" id="partners">
+        <div class="container">
+            <h2 class="slide-up">Our Trusted Partners</h2>
+            <div class="partners-container">
+                <div class="swiper partners-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="partner-item">
+                                <img src="{% static 'images/partner1.png' %}" alt="Partner 1" class="partner-logo">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-item">
+                                <img src="{% static 'images/partner2.png' %}" alt="Partner 2" class="partner-logo">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-item">
+                                <img src="{% static 'images/partner3.png' %}" alt="Partner 3" class="partner-logo">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-item">
+                                <img src="{% static 'images/partner4.png' %}" alt="Partner 4" class="partner-logo">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="partner-item">
+                                <img src="{% static 'images/partner5.png' %}" alt="Partner 5" class="partner-logo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Contact Section with AJAX form #}
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="slide-up">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Innovation City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@globalacetechnology.com</p>
+                </div>
+                <div class="contact-form slide-up">
+                    <form id="inquiry-form" action="/contact/" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Newsletter Signup #}
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h3>Subscribe to Our Newsletter</h3>
+                <form id="newsletter-form" action="/newsletter/subscribe/" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-secondary">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

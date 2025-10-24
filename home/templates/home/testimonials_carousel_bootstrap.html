@@ -1,0 +1,314 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<!-- Bootstrap Testimonials Carousel Section -->
+<section class="testimonials-carousel-section py-5 bg-light">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="display-5 fw-bold mb-3">What Our Clients Say</h2>
+        <p class="lead text-muted">Don't just take our word for it - hear from our satisfied clients</p>
+      </div>
+    </div>
+    
+    <!-- Bootstrap Carousel -->
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-pause="hover">
+          <!-- Indicators -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Testimonial 1"></button>
+            <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1" aria-label="Testimonial 2"></button>
+            <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2" aria-label="Testimonial 3"></button>
+            <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="3" aria-label="Testimonial 4"></button>
+          </div>
+          
+          <!-- Carousel Items -->
+          <div class="carousel-inner">
+            <!-- Testimonial 1 -->
+            <div class="carousel-item active">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                  <div class="testimonial-card text-center">
+                    <div class="card-body p-4 p-lg-5">
+                      <blockquote class="blockquote">
+                        <p class="testimonial-quote lead">"Global Ace Technology transformed our digital infrastructure. Their cloud solutions saved us 40% in operational costs while improving performance."</p>
+                      </blockquote>
+                      <div class="testimonial-author mt-4">
+                        <div class="d-flex align-items-center justify-content-center">
+                          <div class="testimonial-image-wrapper me-3">
+                            <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                              <i class="fas fa-user text-white"></i>
+                            </div>
+                          </div>
+                          <div class="text-start">
+                            <strong class="d-block mb-1">Sarah Johnson</strong>
+                            <span class="text-muted d-block">CTO, TechInnovate Inc.</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="carousel-item">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                  <div class="testimonial-card text-center">
+                    <div class="card-body p-4 p-lg-5">
+                      <blockquote class="blockquote">
+                        <p class="testimonial-quote lead">"The cybersecurity audit conducted by Global Ace identified critical vulnerabilities we didn't even know existed. Their team is truly exceptional."</p>
+                      </blockquote>
+                      <div class="testimonial-author mt-4">
+                        <div class="d-flex align-items-center justify-content-center">
+                          <div class="testimonial-image-wrapper me-3">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                              <i class="fas fa-user text-white"></i>
+                            </div>
+                          </div>
+                          <div class="text-start">
+                            <strong class="d-block mb-1">Michael Chen</strong>
+                            <span class="text-muted d-block">Director of IT, Global Finance Group</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="carousel-item">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                  <div class="testimonial-card text-center">
+                    <div class="card-body p-4 p-lg-5">
+                      <blockquote class="blockquote">
+                        <p class="testimonial-quote lead">"Working with Global Ace on our data analytics platform was a game-changer. We now have real-time insights that drive our business decisions."</p>
+                      </blockquote>
+                      <div class="testimonial-author mt-4">
+                        <div class="d-flex align-items-center justify-content-center">
+                          <div class="testimonial-image-wrapper me-3">
+                            <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                              <i class="fas fa-user text-white"></i>
+                            </div>
+                          </div>
+                          <div class="text-start">
+                            <strong class="d-block mb-1">Emily Rodriguez</strong>
+                            <span class="text-muted d-block">CEO, DataDriven Solutions</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Testimonial 4 -->
+            <div class="carousel-item">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                  <div class="testimonial-card text-center">
+                    <div class="card-body p-4 p-lg-5">
+                      <blockquote class="blockquote">
+                        <p class="testimonial-quote lead">"Their DevOps consulting helped us reduce deployment times from hours to minutes. The team's expertise and professionalism are unmatched in the industry."</p>
+                      </blockquote>
+                      <div class="testimonial-author mt-4">
+                        <div class="d-flex align-items-center justify-content-center">
+                          <div class="testimonial-image-wrapper me-3">
+                            <div class="bg-info rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                              <i class="fas fa-user text-white"></i>
+                            </div>
+                          </div>
+                          <div class="text-start">
+                            <strong class="d-block mb-1">David Thompson</strong>
+                            <span class="text-muted d-block">VP Engineering, StartupHub</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Navigation Arrows -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Initialize Bootstrap Carousel with Autoplay -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const testimonialsCarousel = document.getElementById('testimonialsCarousel');
+    
+    // Enable autoplay with 5 second interval
+    const carousel = new bootstrap.Carousel(testimonialsCarousel, {
+      interval: 5000,
+      pause: 'hover',
+      wrap: true
+    });
+    
+    // Add fade-in animation when slides change
+    testimonialsCarousel.addEventListener('slide.bs.carousel', function (e) {
+      const items = testimonialsCarousel.querySelectorAll('.carousel-item');
+      items.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transition = 'opacity 0.5s ease-in-out';
+      });
+    });
+    
+    testimonialsCarousel.addEventListener('slid.bs.carousel', function (e) {
+      const activeItem = testimonialsCarousel.querySelector('.carousel-item.active');
+      if (activeItem) {
+        activeItem.style.opacity = '1';
+      }
+    });
+  });
+</script>
+
+<!-- Custom CSS -->
+<style>
+  /* Testimonials Carousel Styles */
+  .testimonials-carousel-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+  
+  .testimonial-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: none;
+  }
+  
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blockquote {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 2rem;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  
+  .blockquote:before {
+    content: '"';
+    position: absolute;
+    left: -0.5rem;
+    top: -1rem;
+    font-size: 4rem;
+    color: #0d6efd;
+    opacity: 0.2;
+    font-family: Georgia, serif;
+  }
+  
+  .testimonial-quote {
+    margin-bottom: 0;
+  }
+  
+  .testimonial-image-wrapper {
+    flex-shrink: 0;
+  }
+  
+  .testimonial-author strong {
+    font-size: 1.1rem;
+  }
+  
+  /* Carousel Indicators */
+  .carousel-indicators {
+    margin-bottom: -2rem;
+  }
+  
+  .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #0d6efd;
+    opacity: 0.5;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .carousel-indicators .active {
+    opacity: 1;
+    background-color: #0d6efd;
+    transform: scale(1.2);
+  }
+  
+  /* Carousel Controls */
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .carousel-control-prev:hover,
+  .carousel-control-next:hover {
+    background: white;
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    filter: invert(20%) sepia(90%) saturate(7000%) hue-rotate(210deg) brightness(100%) contrast(100%);
+  }
+  
+  /* Fade effect for slides */
+  .carousel-item {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .carousel-item.active {
+    opacity: 1;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .blockquote {
+      padding: 0;
+      font-size: 1rem;
+    }
+    
+    .blockquote:before {
+      display: none;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .testimonial-card {
+      margin: 0 10px;
+    }
+  }
+</style>
